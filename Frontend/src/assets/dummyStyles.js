@@ -470,16 +470,16 @@ export const loginStyles = {
 
 // assets/navbarStyles.js
 export const navbarStyles = {
-  nav: "fixed w-full z-50 transition-all duration-500",
+  nav: "fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-gradient-to-r from-gray-900 to-gray-800 text-white",
   scrolledNav: "bg-black/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] h-16",
   unscrolledNav: "bg-gradient-to-r from-black/80 via-slate-900/80 to-black/80 backdrop-blur-lg h-20",
   borderGradient: "absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent",
   particlesContainer: "absolute inset-0 overflow-hidden pointer-events-none",
   particle: "absolute rounded-full",
   container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
-  innerContainer: "flex justify-between items-center h-20",
-  logoLink: "flex items-center space-x-3 group transition-transform duration-300 hover:scale-[1.02]",
-  logoImage: "transition-all duration-500",
+  innerContainer: "flex justify-between items-center h-20 transition-all duration-300",
+  logoLink: "flex items-center space-x-3 group transition-transform duration-300 hover:scale-[1.02] py-1",
+  logoImage: "h-12 w-12 sm:h-12 sm:w-12 transition-all duration-500 object-contain",
   logoText: "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300 tracking-tight",
   desktopNav: "hidden lg:flex items-center space-x-8",
   navItem: "relative font-medium flex flex-col items-center py-2 transition-all duration-300 group",
