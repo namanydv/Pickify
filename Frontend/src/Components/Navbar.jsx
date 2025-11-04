@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import {navbarStyles} from '../assets/dummyStyles'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 
 const Navbar = () => {
+    const location = useLocation()
+    
+
     const[scrolled,setScrolled] = useState(false)
+    const [activeTab, setActiveTab] = useState(location.pathname)
+    
 
   return (
     <nav className={`${navbarStyles.nav} ${scrolled ? navbarStyles.scrolled : navbarStyles.unscrolledNav}`}>
@@ -26,10 +31,24 @@ const Navbar = () => {
         {/* Logo */}
         <div className={navbarStyles.container}>
             <div className={navbarStyles.innerContainer}>
-                <div className={navbarStyles.logoContainer}>
+                <div className={navbarStyles.innerContainer}>
                     <Link to ='/' className={navbarStyles.logoLink}>
-                        <img src={logo} alt="Pickify" className={`${navbarStyles.logoImage} ${scrolled ? `h-10` : `h-12`} transition-all`} />
+                        <img src={logo} alt="Pickify" className={`${navbarStyles.logoImage} ${scrolled ? 'h-10 w-10' : 'h-12 w-12'} transition-all`} />
+                        <span className={navbarStyles.logoText}>Pickify</span>
                     </Link>
+
+                    {/* DESKTOP NAVIGATION */}
+                    <div className={navbarStyles.desktopNav}>
+                        {navItems.map(item => (
+                          <Link key ={item.name} to={item.path}
+                          className={`${navbarStyles.navItem}
+                          ${activeTab === item.path ?
+                             navbarStyles.activeNavItem:
+                             navbarStyles.inactiveNavItem}`}>
+                            {item.name}
+                          </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
