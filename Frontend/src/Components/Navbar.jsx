@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {cartStyles, navbarStyles } from '../assets/dummyStyles'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { navItems } from '../assets/Dummy'
 import { FiUser } from 'react-icons/fi'
+import { useCart } from '../CartContext'
 
 const Navbar = () => {
     const location = useLocation()
     const navigate = useNavigate()
+    const {cartCount} = useCart()
 
     const[scrolled,setScrolled] = useState(false)
     const [activeTab, setActiveTab] = useState(location.pathname)
     const [isOpen,setIsOpen] = useState(false)
     const [cartBounce,setCartBounce] = useState(false)
+    const PrevCartCountRef = useRef(cartCount)
 
     const [isLoggedIn,setIsLoggedIn] = useState(
       Boolean(localStorage.getItem('authToken'))
     )
+
+    const mobileMenuRef = useRef(null)
 
     // DEFINE LOGOUT FUNCTION
     const handleLogout = ()=>{
@@ -104,7 +109,11 @@ const Navbar = () => {
                         )}
                         <Link to='/cart' className={navbarStyles.cartLink}>
                             <faOpenCart className={`${navbarStyles.cartIcon} ${cartBounce ? 'animate-bounce' : ''}`} />
-                            {}
+                            {cartCount > 0 && (
+                              <span className={cartStyles.cartBadge}>
+                                {cartCount}
+                              </span>
+                            )}
                         </Link>
 
                     </div>
