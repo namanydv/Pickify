@@ -3,7 +3,7 @@ import {cartStyles, navbarStyles } from '../assets/dummyStyles'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { navItems } from '../assets/Dummy'
-import { FiUser } from 'react-icons/fi'
+import { FiMenu, FiUser, FiX } from 'react-icons/fi'
 import { useCart } from '../CartContext'
 import { FaOpencart } from 'react-icons/fa'
 
@@ -118,6 +118,14 @@ const Navbar = () => {
                               </span>
                             )}
                         </Link>
+
+                        <button onClick={()=> setIsOpen(!isOpen)} className={navbarStyles.hamburgerButton} aria-label={isOpen ? 'Close menu' : 'Open menu'} >
+                          {isOpen ? (
+                            <FiX className=' h-6 w-6 text-white'/>
+                          ) : (
+                            <FiMenu className='h-6 w-6 text-white' />
+                          )}
+                        </button>
 
                     </div>
             </div>
