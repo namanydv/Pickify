@@ -130,6 +130,14 @@ const Navbar = () => {
                     </div>
             </div>
         </div>
+
+        {/* MOBILE MENU OVERLAY */}
+        <div className={`${navbarStyles.mobileOverlay} ${isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-auto opacity-0'} fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300`} onClick={() => setIsOpen(false)} >
+          <div className={`${navbarStyles.mobilePanel} ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+
+          </div>
+
+        </div>
     </nav>
   )
 }
