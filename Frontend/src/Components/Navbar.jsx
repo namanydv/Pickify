@@ -137,19 +137,22 @@ const Navbar = () => {
          ${isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}
           fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300`} 
           onClick={() => setIsOpen(false)}>
-            
+
           <div className={`${navbarStyles.mobilePanel} ${isOpen ? 'translate-x-0' : 'translate-x-full'} fixed right-0 top-0 bottom-0 z-50 w-4/5 max-w-sm`} onClick={(e => e.stopPropagation())} ref={mobileMenuRef}>
               <div className={navbarStyles.mobileHeader}>
                   <div className={navbarStyles.mobileLogo}>
                     <div className={navbarStyles.mobileLogo}>
-                      <img src={logo} alt="Logo" className={navbarStyles.mobileLogo} />
+                      <img src={logo} alt="Pickify Logo" className={navbarStyles.mobileLogo} />
                       <span className={navbarStyles.mobileLogoText}>Picify</span>
                     </div>
                   </div>
-                  <button onClick={() => setIsOpen(false)} className={navbarStyles.closeButton} aria-label='Close Menu'>
+                  <button onClick={() => setIsOpen(false)} 
+                  className={navbarStyles.closeButton} 
+                  aria-label='Close Menu'>
                     <FiX className='h-6 w-6 text-white'/>
                   </button>
               </div>
+
               <div className={navbarStyles.mobileItemsContainer}>
                 {navItems.map((item, index) => (
                   <Link
@@ -159,10 +162,12 @@ const Navbar = () => {
                     style={{
                       transition: isOpen ? `${index * 100}ms` : `0ms`,
                       opacity: isOpen ? 1 : 0,
-                      transform: `translateX(${isOpen ? 0 : 20}px)`
+                      transform: `translateX(${isOpen ? 0 : '20px'})`,
                     }}
+                    onClick={()=> setIsOpen(false)}
                   >
-                    {item.name}
+                    <span className={navbarStyles.mobileItemIcon}>{item.icon}</span>
+                    <span className={navbarStyles.mobileItemText}>{item.name}</span>
                   </Link>
                 ))}
               </div>
