@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {cartStyles, navbarStyles } from '../assets/dummyStyles'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
@@ -24,6 +24,18 @@ const Navbar = () => {
     )
 
     const mobileMenuRef = useRef(null)
+
+    useEffect(() =>{
+      setActiveTab(location.pathname)
+      setIsOpen(false)
+    },[location])
+
+    //SCROLL EFFECTS
+    useEffect(()=>{
+      const handleScroll = () => setScrolled(window.scrollY > 20)
+      window,addEventListener('scroll',handleScroll)
+      return () =>window.removeEventListener('scroll',handleScroll)
+    },[])
 
     // DEFINE LOGOUT FUNCTION
     const handleLogout = ()=>{
