@@ -57,6 +57,17 @@ const Navbar = () => {
     },[])
 
     //CLOSE MOBILE MENU WHEN CLICK OUTSIDE
+    useEffect(()=>{
+      const handleClickOutside = (event) =>{
+        if(isOpen & mobileMenuRef.current && mobileMenuRef.current.contains(event.target)){
+          setIsOpen(false)
+        }
+      }
+      document.addEventListener('mousedown',handleClickOutside)
+      return () =>{
+        document.removeEventListener('mousedown'.handleClickOutside)
+      }
+    },[isOpen])
 
     // DEFINE LOGOUT FUNCTION
     const handleLogout = ()=>{
@@ -86,7 +97,7 @@ const Navbar = () => {
     <nav className={`${navbarStyles.nav} ${scrolled ? navbarStyles.scrolled : navbarStyles.unscrolledNav}`}>
         <div className={navbarStyles.borderGradient}/>
         <div className={navbarStyles.particlesContainer }>
-            <>
+      <>
       <div
         className={`${navbarStyles.particle} w-24 h-24 bg-emerald-500/5 -top-12 left-1/4 ${navbarStyles.floatAnimation}`}
       />
