@@ -6,9 +6,9 @@ import { bannerStyles } from './dummyStyles'
 // BANNER HOME
 export const features = [
     { icon: <FiTruck className={bannerStyles.featureIcon} />, text: 'Fast Delivery' },
+    { icon: <FiHome className={bannerStyles.featureIcon} />, text: 'Self-Pickup' },
     { icon: <FiPercent className={bannerStyles.featureIcon} />, text: 'Best Prices' },
-    { icon: <FiShoppingCart className={bannerStyles.featureIcon} />, text: 'Easy Returns' },
-    { icon: <FiGift className={bannerStyles.featureIcon} />, text: 'Daily Deals' },
+    { icon: <FiShoppingCart className={bannerStyles.featureIcon} />, text: 'Easy Shopping' },
 ];
 
 
