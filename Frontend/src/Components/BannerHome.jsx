@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { bannerStyles } from '../assets/dummyStyles'
-import { FiTruck } from 'react-icons/fi'
+import { FiSearch, FiTruck } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
+import { features } from '../assets/Dummy'
 
 const BannerHome = ({onSearch}) => {
+    
+    const [searchTerm,setSearchTerm] = useState('')
+    const navigate = useNavigate()
 
-        
+    const handleSearch = (e) => setSearchTerm(e.target.value)
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        const trimmedTerm = searchTerm.trim();
+
+        if(trimmedTerm){
+            if(onSearch){
+                const searchWords = trimmedTerm.toLowerCase().split(/\s+/)
+                onSearch(searchWords.join(' '))
+            }
+            else{
+                navigate(`/item?search=${encodeURIComponent(trimmedTerm)}`)
+            }
+            setSearchTerm('')
+        }
+    }
+    
+
   return (
     <div className='relative overflow-hidden pt-16'>
         {/* BackGround Gradient */}
@@ -35,8 +58,22 @@ const BannerHome = ({onSearch}) => {
                     </p>
 
                     <form onSubmit={handleSubmit} className={bannerStyles.form} > 
-                        <input type='text' value={}></input>
+                        <input type='text' value={searchTerm} onChange={handleSearch} placeholder='Search for Grocery,Vegetables, Dairy Products...' className={bannerStyles.input} />
+                        <button type='submit' className={bannerStyles.searchButton}>
+                            <FiSearch className='h-4 w-4 sm:h-5 sm:w-5'/>
+                        </button>
                     </form>
+
+                    <div className=' grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+                        {features.map((f,i) => {
+                            return(
+                            <div key={i} className={bannerStyles.featureItem}>
+                                <div className='text-teal-600 mb-1'>{f.icon}</div>
+                                <span className={bannerStyles.featureText}>{f.text}</span>
+                            </div> 
+                            )
+                        })} 
+                    </div>
                 </div>
             </div>
         </div>
