@@ -54,7 +54,8 @@ New features, UI enhancements, and delivery logic improvements are being added c
 - AI/Smart product recommendations
 - Mobile App (React Native / Flutter)
 
----
+<img width="1862" height="860" alt="image" src="https://github.com/user-attachments/assets/84a75ccb-92bb-4411-ac55-5a4d55c49daf" />
+
 
 ---
 
