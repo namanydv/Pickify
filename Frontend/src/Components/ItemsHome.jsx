@@ -1,13 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { itemsHomeStyles } from '../assets/dummyStyles'
 import BannerHome from './BannerHome'
+import { useNavigate } from 'react-router-dom'
+import { FaThList } from 'react-icons/fa'
+import {categories} from '../assets/dummyData'
 
 const ItemsHome = () => {
-    const[search,setsearch] = useState('')
+  cons[activeCategory, setActiceCategory] = useState(()=> {
+    return localStorage.getItem('activeCategory' || 'All')
+  })
+
+    useEffect(()=>{
+      localStorage.setItem('activeCategory',activeCategory)
+    },[activeCategory])
+
+    const navigate = useNavigate()
+    const{cart} = useCart()
+    const[searchTerm,setsearchTerm] = useState('')
 
     const handleSearch = (term) =>{
         setsearch(term)
     }
+
+    //CREATE A SIDEBAR CATEGORY
+    const sidebarCategories = [
+      {
+        name: "All Items",
+        icon: <FaThList className='text-lg'/>,
+        value: "All"
+      },
+      ...categories
+];
+
 
   return (
     <div className={itemsHomeStyles.page}>
@@ -24,6 +48,25 @@ const ItemsHome = () => {
             className={itemsHomeStyles.sidebarTitle}>
                 FreshCart
             </h1>
+            <div className={itemsHomeStyles.sidebarDivider}/>
+          </div>
+
+          <div className={itemsHomeStyles.categoryList}>
+            <ul className='space-y-3'>
+              {sidebarCategories.map((category) => {
+                <li key ={category.name}>
+                  <button onClick={ () =>{
+                    setActiceCategory(category.value || category.name)
+                    setsearchTerm('')
+                  }}
+                  
+                  className={`${itemsHomeStyles.categoryItem}
+                  ${(activeCategory === (category.value || category.name)) && !searchTerm ? itemsHomeStyles.activeCategory :itemsHomeStyles.inactiveCategory}`}>
+                    
+                  </button>
+                </li>
+              })}
+            </ul>
           </div>
         </aside>
       </div>
