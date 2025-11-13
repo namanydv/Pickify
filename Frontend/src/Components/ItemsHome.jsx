@@ -99,8 +99,31 @@ import { act } from 'react'
               ))}
             </div>
           </div>
-        </main>
+          {/* SEARCH RESULT */}
+          {searchTerm && (
+            <div className={itemsHomeStyles.searchResults}>
+              <div className='flex items-center justify-center'>
+                 <span className='text-emerald-700 font-medium'>
+                  Search results for : <span className='font-bold'>"{searchTerm}"</span>
+                 </span>
 
+                  <button onCanPlay={() => setsearchTerm('')} className='ml-4 text-emerald-500 hover:text-shadow-emerald-700 p-1 rounded-b-full transition-colors'>
+                    <span className='text-sm bg-emerald-100 px-2 py-1 rounded-b-full'>Clear</span>
+                  </button>
+              </div>
+            </div>
+          )}
+          {/* SECTION TITLE */}
+          <div className='text-center mb-6'>
+              <h2 className={itemsHomeStyles.sectionTitle}
+              style={{
+                fontFamily:"'playfair Display'"
+              }}
+              >
+                
+              </h2>
+          </div>
+        </main> 
       </div>
     </div>
   )
