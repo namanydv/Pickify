@@ -83,14 +83,20 @@ import { act } from 'react'
           <div className={itemsHomeStyles.mobileCategories}>
             <div className='flex space-x-4'>
               {sidebarCategories.map((cat) => (
-                <button key={cat.name} onClick={() =>{
+                <button
+                 key={cat.name} 
+                 onClick={() =>{
                   setActiveCategory(cat.value || cat.name)
-                  setsearchTerm(' ')
-                }} className={`${itemsHomeStyles.mobileCategoryItem} ${activeCategory === (cat.value || cat.name) && !searchTerm ? itemsHomeStyles.activeMobileCategory : itemsHomeStyles.inactiveMobileCategory }`}>
+                  setsearchTerm('')
+                }} 
+                className={`${itemsHomeStyles.mobileCategoryItem} ${
+                  activeCategory === (cat.value || cat.name) && !searchTerm 
+                  ? itemsHomeStyles.activeMobileCategory 
+                  : itemsHomeStyles.inactiveMobileCategory
+                  }`}>
                   {cat.name}
                 </button>
               ))}
-
             </div>
           </div>
         </main>
