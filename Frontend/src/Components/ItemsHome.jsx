@@ -160,29 +160,41 @@ import { act } from 'react'
 
       {/* SECTION TITLE */}
       <div className="text-center mb-6">
-        <h2
-          className={itemsHomeStyles.sectionTitle}
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          {searchTerm
-            ? "Search Results"
-            : activeCategory === "ALL"
-            ? "Feature Product"
-            : `Best ${activeCategory}`}
-        </h2>
-        <div className={itemsHomeStyles.sectionDivider} />
-      </div>
+          <h2
+            className={itemsHomeStyles.sectionTitle}
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            {searchTerm
+              ? "Search Results"
+              : activeCategory === "ALL"
+              ? "Feature Product"
+              : `Best ${activeCategory}`}
+          </h2>
+          <div className={itemsHomeStyles.sectionDivider} />
+        </div>
 
       {/* PRODUCT GRID */}
       <div className={itemsHomeStyles.productsGrid}>
-        {searchedProducts.length > 0 &&
-          searchedProducts.map((product) => {
-            const qty = getQuantity(product.id);
-            
-          })}
-      </div>
-    </main>
-    
+          {searchedProducts.length > 0 &&
+            searchedProducts.map((product) => {
+            const qty = getQuantity(product.id)
+              return(
+                <div key={product.id}
+                className={itemsHomeStyles.productCard}>
+                  <div className={itemsHomeStyles.imageContainer}>
+                    <img src={product.image} alt={product.name}
+                    className={itemsHomeStyles.productImage} onError={(e) => {
+                      e.target.onError = null;
+                      e.target.parenntNode.innerHTML = `<div class = 'flex items-center justify-center w-full h-full bg-gray-200'>
+                      
+                      </div>`
+                    }}/>
+                  </div>
+                </div>
+              )
+            })}
+        </div>
+      </main>
           </div>
         </div>
       )
