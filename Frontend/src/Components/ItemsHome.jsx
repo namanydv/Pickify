@@ -18,7 +18,7 @@ import { act } from 'react'
     },[activeCategory])
 
     const navigate = useNavigate()
-    const{cart} = useCart()
+    const{cart, addToCart, updateQuantity, removefromCart } = useCart()
     const[searchTerm,setsearchTerm] = useState('')
 
     // SEARCH FEATURE
@@ -33,7 +33,24 @@ import { act } from 'react'
       })
     }
 
-    //SEARCH ACROSS ALL PROJECTS
+    //SEARCH ACROSS ALL PRODUCTS
+    const searchedProducts = searchTerm
+    ? products.filter(product =>
+      productMatchesSearch(product,searchTerm))
+    : (activeCategory == "All"
+    ? products : products.filter((product) => product.category === activeCategory))
+
+    const getQuantity = (productId) =>{
+      const item = cart.find((ci) => ci.id === productId)
+      return item ? item.quantity : 0
+    }
+
+    const handleIncrease = (product) => addToCart(product,1)
+    const handleDecrease = (product) => {
+      const qty = getQuantity(product.id)
+      if(qty >1 ) updateQuantity(product.id,qty -1)
+        else removefromCart (product.id)
+    }
 
     const handleSearch = (term) => {
       setsearchTerm(term);
@@ -141,7 +158,11 @@ import { act } from 'react'
               </div>
               {/* PRODUCT GRID */}
               <div className={itemsHomeStyles.productsGrid}>
-
+                  {searchedProducts.length > 0 ? (
+                    searchedProducts.map((product) => {
+                      const qty = getQuantity(product.id)
+                    })
+                  )}
               </div>
           </div>
 
