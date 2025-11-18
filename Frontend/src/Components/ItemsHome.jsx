@@ -181,15 +181,22 @@ import { act } from 'react'
               return(
                 <div key={product.id}
                 className={itemsHomeStyles.productCard}>
-                  <div className={itemsHomeStyles.imageContainer}>
+                <div className={itemsHomeStyles.imageContainer}>
                     <img src={product.image} alt={product.name}
                     className={itemsHomeStyles.productImage} onError={(e) => {
                       e.target.onError = null;
                       e.target.parenntNode.innerHTML = `<div class = 'flex items-center justify-center w-full h-full bg-gray-200'>
-                      <span class=' text-gray-500 text-sm'
+                      <span class=' text-gray-500 text-sm'>No Image</span>
                       </div>`
-                    }}/>
+                    }}
+                  />
+                </div>
+                  <div className={itemsHomeStyles.productContent}>
+                    <h3 className={itemsHomeStyles.productTitle}>
+                      {product.name}
+                    </h3>
                   </div>
+
                 </div>
               )
             })}
