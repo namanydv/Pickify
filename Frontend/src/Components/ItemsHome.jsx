@@ -114,122 +114,139 @@ import { act } from 'react'
           </div>
         </aside>
         {/* MAIN CONTENT */}
-    <main className={itemsHomeStyles.mainContent}>
-      {/* MOBILE CATEGORY SCROLL */}
-      <div className={itemsHomeStyles.mobileCategories}>
-        <div className="flex space-x-4">
-          {sidebarCategories.map((cat) => (
-            <button
-              key={cat.name}
-              onClick={() => {
-                setActiveCategory(cat.value || cat.name);
-                setsearchTerm("");
-              }}
-              className={`${itemsHomeStyles.mobileCategoryItem} ${
-                activeCategory === (cat.value || cat.name) && !searchTerm
-                  ? itemsHomeStyles.activeMobileCategory
-                  : itemsHomeStyles.inactiveMobileCategory
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
+          <main className={itemsHomeStyles.mainContent}>
+            {/* MOBILE CATEGORY SCROLL */}
+            <div className={itemsHomeStyles.mobileCategories}>
+              <div className="flex space-x-4">
+                {sidebarCategories.map((cat) => (
+                  <button
+                    key={cat.name}
+                    onClick={() => {
+                      setActiveCategory(cat.value || cat.name);
+                      setsearchTerm("");
+                    }}
+                    className={`${itemsHomeStyles.mobileCategoryItem} ${
+                      activeCategory === (cat.value || cat.name) && !searchTerm
+                        ? itemsHomeStyles.activeMobileCategory
+                        : itemsHomeStyles.inactiveMobileCategory
+                    }`}
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* SEARCH RESULT */}
+            {searchTerm && (
+              <div className={itemsHomeStyles.searchResults}>
+                <div className="flex items-center justify-center">
+                  <span className="text-emerald-700 font-medium">
+                    Search results for: <span className="font-bold">"{searchTerm}"</span>
+                  </span>
+
+                  <button
+                    onClick={() => setsearchTerm("")}
+                    className="ml-4 text-emerald-500 hover:text-shadow-emerald-700 p-1 rounded-b-full transition-colors"
+                  >
+                    <span className="text-sm bg-emerald-100 px-2 py-1 rounded-b-full">
+                      Clear
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* SECTION TITLE */}
+            <div className="text-center mb-6">
+              <h2
+                className={itemsHomeStyles.sectionTitle}
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                {searchTerm
+                  ? "Search Results"
+                  : activeCategory === "ALL"
+                  ? "Feature Product"
+                  : `Best ${activeCategory}`}
+              </h2>
+              <div className={itemsHomeStyles.sectionDivider} />
+            </div>
+
+            {/* PRODUCT GRID */}
+            <div className={itemsHomeStyles.productsGrid}>
+              {searchedProducts.length > 0 ? (
+                searchedProducts.map((product) => {
+                  const qty = getQuantity(product.id);
+                  return (
+                    <div key={product.id} className={itemsHomeStyles.productCard}>
+                      <div className={itemsHomeStyles.imageContainer}>
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className={itemsHomeStyles.productImage}
+                          onError={(e) => {
+                            // safer: replace broken src with placeholder image
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/placeholder.png";
+                          }}
+                        />
+                      </div>
+
+                      <div className={itemsHomeStyles.productContent}>
+                        <h3 className={itemsHomeStyles.productTitle}>{product.name}</h3>
+
+                        <div className={itemsHomeStyles.priceContainer}>
+                          <div>
+                            <p className={itemsHomeStyles.currentPrice}>
+                              ₹{product.price.toFixed(2)}
+                            </p>
+                            <span className={itemsHomeStyles.oldPrice}>
+                              ₹{(product.price * 1.2).toFixed(2)}
+                            </span>
+                          </div>
+
+                          {/* ADD CONTROLS */}
+                          {qty === 0 ? (
+                            <button
+                              onClick={() => handleIncrease(product)}
+                              className={itemsHomeStyles.addButton}
+                            >
+                              <FaShoppingCart className="mr-2" />
+                              Add
+                            </button>
+                          ) : (
+                            <div className={itemsHomeStyles.quantityControls}>
+                              <button
+                                onClick={() => handleDecrease(product)}
+                                className={itemsHomeStyles.quantityButton}
+                              >
+                                <FaMinus />
+                              </button>
+
+                              <span className="font-bold">{qty}</span>
+
+                              <button
+                                onClick={() => handleIncrease(product)}
+                                className={itemsHomeStyles.quantityButton}
+                              >
+                                <FaPlus />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className={itemsHomeStyles.noProducts}>
+                  <div className={itemsHomeStyles.noProductsText}>No products Found</div>
+                </div>
+              )}
+            </div>
+          </main>
         </div>
       </div>
-
-      {/* SEARCH RESULT */}
-      {searchTerm && (
-        <div className={itemsHomeStyles.searchResults}>
-          <div className="flex items-center justify-center">
-            <span className="text-emerald-700 font-medium">
-              Search results for:{" "}
-              <span className="font-bold">"{searchTerm}"</span>
-            </span>
-
-            <button
-              onClick={() => setsearchTerm("")}
-              className="ml-4 text-emerald-500 hover:text-shadow-emerald-700 p-1 rounded-b-full transition-colors"
-            >
-              <span className="text-sm bg-emerald-100 px-2 py-1 rounded-b-full">
-                Clear
-              </span>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* SECTION TITLE */}
-      <div className="text-center mb-6">
-          <h2
-            className={itemsHomeStyles.sectionTitle}
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            {searchTerm
-              ? "Search Results"
-              : activeCategory === "ALL"
-              ? "Feature Product"
-              : `Best ${activeCategory}`}
-          </h2>
-          <div className={itemsHomeStyles.sectionDivider} />
-        </div>
-
-      {/* PRODUCT GRID */}
-      <div className={itemsHomeStyles.productsGrid}>
-          {searchedProducts.length > 0 &&
-            searchedProducts.map((product) => {
-            const qty = getQuantity(product.id)
-              return(
-                <div key={product.id}
-                className={itemsHomeStyles.productCard}>
-                <div className={itemsHomeStyles.imageContainer}>
-                    <img src={product.image} alt={product.name}
-                    className={itemsHomeStyles.productImage} onError={(e) => {
-                      e.target.onError = null;
-                      e.target.parenntNode.innerHTML = `<div class = 'flex items-center justify-center w-full h-full bg-gray-200'>
-                      <span class=' text-gray-500 text-sm'>No Image</span>
-                      </div>`
-                    }}
-                  />
-                </div>
-                  <div className={itemsHomeStyles.productContent}>
-                    <h3 className={itemsHomeStyles.productTitle}>
-                      {product.name}
-                    </h3>
-                    <div className={itemsHomeStyles.priceContainer}>
-                      <div>
-                      <p className={itemsHomeStyles.currentPrice}>
-                        ₹{product.price.toFixed(2)}
-                      </p>
-                      <span className={itemsHomeStyles.oldPrice}>
-                        ₹{(product.price * 1.2).toFixed(2)}
-                      </span>
-                      </div>
-                      {/*  ADD CONTROLS  */}
-                      {qty === 0 ? (
-                        <button onClick={() =>handleIncrease(product)}
-                        className={itemsHomeStyles.addButton}><FaShoppingCart className='mr-2'/>Add</button>
-                      ): (
-                        <div className={itemsHomeStyles.quantityControls}>
-                          <button onClick={() => handleDecrease(product)}
-                            className={itemsHomeStyles.quantityButton}>
-                              <FaMinus/>
-                            </button>
-                            <span className='font-bold'>{qty}</span>
-                            <button onClick={() => handleIncrease(product)}
-                              className={itemsHomeStyles.quantityButton}>
-                                <FaPlus/>
-                            </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-        </div>
-      </main>
-          </div>
-        </div>
       )
     }
 
