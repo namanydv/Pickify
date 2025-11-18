@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { itemsHomeStyles } from '../assets/dummyStyles'
 import BannerHome from './BannerHome'
 import { useNavigate } from 'react-router-dom'
-import { FaThList } from 'react-icons/fa'
+import { FaMinus, FaShoppingCart, FaThList } from 'react-icons/fa'
 import {categories, products} from '../assets/dummyData'
 import { useCart } from '../CartContext'
 import { act } from 'react'
@@ -195,8 +195,29 @@ import { act } from 'react'
                     <h3 className={itemsHomeStyles.productTitle}>
                       {product.name}
                     </h3>
+                    <div className={itemsHomeStyles.priceContainer}>
+                      <div>
+                      <p className={itemsHomeStyles.currentPrice}>
+                        ₹{product.price.toFixed(2)}
+                      </p>
+                      <span className={itemsHomeStyles.oldPrice}>
+                        ₹{(product.price * 1.2).toFixed(2)}
+                      </span>
+                      </div>
+                      {/*  ADD CONTROLS  */}
+                      {qty === 0 ? (
+                        <button onClick={() =>handleIncrease(product)}
+                        className={itemsHomeStyles.addButton}><FaShoppingCart className='mr-2'/>Add</button>
+                      ): (
+                        <div className={itemsHomeStyles.quantityControls}>
+                          <button onClick={() => handleDecrease(product)}
+                            className={itemsHomeStyles.quantityButton}>
+                              <FaMinus/>
+                            </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-
                 </div>
               )
             })}
