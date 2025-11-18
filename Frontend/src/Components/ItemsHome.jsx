@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { itemsHomeStyles } from '../assets/dummyStyles'
 import BannerHome from './BannerHome'
 import { useNavigate } from 'react-router-dom'
-import { FaMinus, FaShoppingCart, FaThList } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaShoppingCart, FaThList } from 'react-icons/fa'
 import {categories, products} from '../assets/dummyData'
 import { useCart } from '../CartContext'
 import { act } from 'react'
@@ -213,6 +213,11 @@ import { act } from 'react'
                           <button onClick={() => handleDecrease(product)}
                             className={itemsHomeStyles.quantityButton}>
                               <FaMinus/>
+                            </button>
+                            <span className='font-bold'>{qty}</span>
+                            <button onClick={() => handleIncrease(product)}
+                              className={itemsHomeStyles.quantityButton}>
+                                <FaPlus/>
                             </button>
                         </div>
                       )}
