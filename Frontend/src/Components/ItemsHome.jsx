@@ -186,7 +186,7 @@ import { act } from 'react'
                     className={itemsHomeStyles.productImage} onError={(e) => {
                       e.target.onError = null;
                       e.target.parenntNode.innerHTML = `<div class = 'flex items-center justify-center w-full h-full bg-gray-200'>
-                      
+                      <span class=' text-gray-500 text-sm'
                       </div>`
                     }}/>
                   </div>
