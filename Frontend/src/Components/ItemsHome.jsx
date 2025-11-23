@@ -9,7 +9,7 @@ import { act } from 'react'
 
   const ItemsHome = () => {
     const [activeCategory, setActiveCategory] = useState(() => {
-    return localStorage.getItem('activeCategory') || 'All';
+    return localStorage.getItem('activeCategory') || 'All'
   }); 
  
 
