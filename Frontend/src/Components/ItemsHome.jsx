@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { FaChevronCircleRight, FaMinus, FaPlus, FaShoppingCart, FaThList } from 'react-icons/fa'
 import {categories, products} from '../assets/dummyData'
 import { useCart } from '../CartContext'
-import { act } from 'react'
 
   const ItemsHome = () => {
     const [activeCategory, setActiveCategory] = useState(() => {
@@ -23,13 +22,13 @@ import { act } from 'react'
 
     // SEARCH FEATURE
     const productMatchesSearch = (product,term)=>{
-      if(!term )return true
-      const clearTerm = term.trim().toLowercase()
+      if(!term ) return true;
 
+      const clearTerm = term.trim().toLowercase();
       const searchWords = clearTerm.split(/\s+/)
 
       return searchWords.every(word =>{
-        product.name.toLowercase().include(word)
+        return product.name.toLowerCase().include(word)
       })
     }
 
@@ -165,7 +164,7 @@ import { act } from 'react'
               >
                 {searchTerm
                   ? "Search Results"
-                  : activeCategory === "ALL"
+                  : activeCategory === "All"
                   ? "Feature Product"
                   : `Best ${activeCategory}`}
               </h2>
