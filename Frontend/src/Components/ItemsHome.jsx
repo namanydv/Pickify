@@ -17,7 +17,7 @@ import { useCart } from '../CartContext'
     },[activeCategory])
 
     const navigate = useNavigate()
-    const{cart, addToCart, updateQuantity, removefromCart } = useCart()
+    const{cart, addToCart, updateQuantity, removeFromCart } = useCart()
     const[searchTerm,setsearchTerm] = useState('')
 
     // SEARCH FEATURE
@@ -47,8 +47,8 @@ import { useCart } from '../CartContext'
     const handleIncrease = (product) => addToCart(product,1)
     const handleDecrease = (product) => {
       const qty = getQuantity(product.id)
-      if(qty >1 ) updateQuantity(product.id,qty -1)
-        else removefromCart (product.id)
+      if(qty > 1) updateQuantity(product.id, qty - 1)
+      else removeFromCart(product.id)
     }
 
     // REDIRECT TO ITEMS
