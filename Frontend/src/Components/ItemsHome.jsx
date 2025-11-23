@@ -241,6 +241,12 @@ import { act } from 'react'
               ) : (
                 <div className={itemsHomeStyles.noProducts}>
                   <div className={itemsHomeStyles.noProductsText}>No products Found</div>
+
+                <button onClick={()=> setsearchTerm('')}
+                className={itemsHomeStyles.clearSearchButton}>
+                  Clear Search
+                </button>
+                  
                 </div>
               )}
             </div>
