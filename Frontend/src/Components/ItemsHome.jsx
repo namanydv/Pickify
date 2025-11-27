@@ -24,11 +24,11 @@ import { useCart } from '../CartContext'
     const productMatchesSearch = (product,term)=>{
       if(!term ) return true;
 
-      const clearTerm = term.trim().toLowercase();
+      const clearTerm = term.trim().toLowerCase();
       const searchWords = clearTerm.split(/\s+/)
 
       return searchWords.every(word =>{
-        return product.name.toLowerCase().include(word)
+        return product.name.toLowerCase().includes(word)
       })
     }
 
