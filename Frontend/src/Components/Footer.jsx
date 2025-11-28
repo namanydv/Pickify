@@ -33,6 +33,11 @@ const Footer = () => {
         <div className={footerStyles.container}>
           <div className={footerStyles.grid}>
             {/* BRAND */}
+            <div>
+              <h2 className={footerStyles.brandTitle}>
+                Pickify <span className={footerStyles.brandSpan}>Pickify</span>
+              </h2>
+            </div>
           </div>
         </div>
     </footer>
