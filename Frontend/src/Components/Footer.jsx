@@ -36,7 +36,7 @@ const Footer = () => {
             {/* BRAND */}
             <div>
               <h2 className={footerStyles.brandTitle}>
-                <span className={footerStyles.brandSpan}>Pickify</span>
+                Pick<span className={footerStyles.brandSpan}>ify</span>
               </h2>
             </div>
           </div>
